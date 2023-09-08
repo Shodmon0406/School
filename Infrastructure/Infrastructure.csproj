@@ -21,6 +21,14 @@
     <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Services\Claas\" />
+    <Folder Include="Services\Classroom\" />
+    <Folder Include="Services\Student\" />
+    <Folder Include="Services\Subject\" />
+    <Folder Include="Services\Teacher\" />
+  </ItemGroup>
+
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
