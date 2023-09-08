@@ -22,7 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Services\Claas\" />
     <Folder Include="Services\Classroom\" />
     <Folder Include="Services\Student\" />
     <Folder Include="Services\Subject\" />

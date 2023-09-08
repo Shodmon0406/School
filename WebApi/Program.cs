@@ -1,3 +1,4 @@
+using Infrastructure.AutoMapper;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.EntityFrameworkCore;
@@ -21,6 +22,7 @@ builder.Services.SwaggerService();
 
 builder.Services.AddAuthConfigureService(builder.Configuration);
 
+builder.Services.AddAutoMapper(typeof(ServiceProfile));
 
 var app = builder.Build();
 
