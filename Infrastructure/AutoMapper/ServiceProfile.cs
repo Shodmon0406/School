@@ -1,6 +1,7 @@
 using AutoMapper;
 using Domain.Dtos.Class;
 using Domain.Dtos.Classroom;
+using Domain.Dtos.StipendDto;
 using Domain.Dtos.Student;
 using Domain.Dtos.Teacher;
 using Domain.Entities;
@@ -22,7 +23,9 @@ public class ServiceProfile:Profile
         CreateMap<Subject, AddSubjectDto>().ReverseMap();
         CreateMap<Teacher, GetTeacherDto>().ReverseMap();
         CreateMap<Teacher, AddTeacherDto>().ReverseMap();
-        
+
+        CreateMap<Stipend, GetStipendDto>();
+        CreateMap<AddStipendDto, Stipend>();
     }
     
     
