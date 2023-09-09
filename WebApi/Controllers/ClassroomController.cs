@@ -17,7 +17,7 @@ public class ClassroomController:Controller
     }
 
     [HttpGet("get/classrooms")]
-    public async Task<IActionResult> GetClassrooms(GetClassroomFilter classroomFilter)
+    public async Task<IActionResult> GetClassrooms([FromQuery]GetClassroomFilter classroomFilter)
     {
         if (ModelState.IsValid)
         {
@@ -29,7 +29,7 @@ public class ClassroomController:Controller
     }
 
     [HttpGet("get/classroom/by/id")]
-    public async Task<IActionResult> GetClassroom(int id)
+    public async Task<IActionResult> GetClassroom([FromQuery]int id)
     {
         if (ModelState.IsValid)
         {
@@ -41,7 +41,7 @@ public class ClassroomController:Controller
     }
 
     [HttpPost("create/classroom")]
-    public async Task<IActionResult> CreateClassroom(AddClassroomDto createClassroomDto)
+    public async Task<IActionResult> CreateClassroom([FromBody]AddClassroomDto createClassroomDto)
     {
         if (ModelState.IsValid)
         {
@@ -53,7 +53,7 @@ public class ClassroomController:Controller
     }
 
     [HttpPut("update/classroom")]
-    public async Task<IActionResult> UpdateClassroom(AddClassroomDto updateClassroomDto)
+    public async Task<IActionResult> UpdateClassroom([FromBody]AddClassroomDto updateClassroomDto)
     {
         if (ModelState.IsValid)
         {
@@ -65,7 +65,7 @@ public class ClassroomController:Controller
     }
 
     [HttpDelete("delete/classroom")]
-    public async Task<IActionResult> DeleteClassroom(int id)
+    public async Task<IActionResult> DeleteClassroom([FromQuery]int id)
     {
         if (ModelState.IsValid)
         {

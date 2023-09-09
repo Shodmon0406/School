@@ -20,7 +20,7 @@ public class ClassController :Controller
     }
 
     [HttpGet("get-all-class")]
-    public async Task<IActionResult> GetAllClass(GetClassFilter filter)
+    public async Task<IActionResult> GetAllClass([FromQuery]GetClassFilter filter)
     {
         if (ModelState.IsValid)
         {
@@ -33,7 +33,7 @@ public class ClassController :Controller
     }
     
     [HttpGet("get-all-class-by-id")]
-    public async Task<IActionResult> GetClassById(int classId)
+    public async Task<IActionResult> GetClassById([FromQuery]int classId)
     {
         if (ModelState.IsValid)
         {
@@ -46,7 +46,7 @@ public class ClassController :Controller
     }
     
     [HttpPost("add-class")]
-    public async Task<IActionResult> AddClass(AddClassDto addClass)
+    public async Task<IActionResult> AddClass([FromBody]AddClassDto addClass)
     {
         if (ModelState.IsValid)
         {
@@ -59,7 +59,7 @@ public class ClassController :Controller
     }
     
     [HttpPost("update-class")]
-    public async Task<IActionResult> UpdateClass(AddClassDto updateClass)
+    public async Task<IActionResult> UpdateClass([FromBody]AddClassDto updateClass)
     {
         if (ModelState.IsValid)
         {
@@ -72,7 +72,7 @@ public class ClassController :Controller
     }
     
     [HttpDelete("delete-class")]
-    public async Task<IActionResult> DeleteClass(int classId)
+    public async Task<IActionResult> DeleteClass([FromQuery]int classId)
     {
         if (ModelState.IsValid)
         {
