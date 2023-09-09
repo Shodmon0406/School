@@ -26,4 +26,18 @@ public class Response<T>
         StatusCode = (int)code;
         Errors.AddRange(message);
     }
+    
+    public Response(HttpStatusCode code, List<string> message,T data)
+    {
+        Data = data;
+        StatusCode = (int)code;
+        Errors.AddRange(message);
+    }
+    
+    public Response(HttpStatusCode code, string message,T data)
+    {
+        Data = data;
+        StatusCode = (int)code;
+        Errors.Add(message);
+    }
 }
