@@ -12,6 +12,7 @@ namespace Domain.Entities
 {
     public class Student : IdentityUser
     {
+        public string Address { get; set; } = null!;
         public string StudentCode { get; set; } = null!;
         public string FirstName { get; set; } = null!;
         public string LastName { get; set; } = null!;

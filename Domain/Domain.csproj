@@ -25,15 +25,6 @@
 
   <ItemGroup>
     <Folder Include="Constant\" />
-    <Folder Include="Dtos\Classroom\" />
-    <Folder Include="Dtos\Class\" />
-    <Folder Include="Dtos\Student\" />
-    <Folder Include="Dtos\Subject\" />
-    <Folder Include="Dtos\Teacher\" />
-    <Folder Include="Filters\ClassFilter\" />
-    <Folder Include="Filters\ClassroomFilter\" />
-    <Folder Include="Filters\StudentFilter\" />
-    <Folder Include="Filters\SubjectFilter\" />
     <Folder Include="Filters\TeacherFilter\" />
   </ItemGroup>
 

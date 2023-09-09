@@ -1,9 +1,13 @@
-﻿namespace Domain.Entities
+﻿using Domain.Enums;
+
+namespace Domain.Entities
 {
     public class Parent
     {
         public int Id { get; set; }
-        public int ParrentCode { get; set; }
+        public string Password { get; set; } = null!;
+        public int ParentCode { get; set; }
+        public Gender Gender { get; set; }
         public string FirstName { get; set; } = null!;
         public string LastName { get; set; } = null!;
         public string Email { get; set; } = null!;
