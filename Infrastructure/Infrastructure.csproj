@@ -19,7 +19,12 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj" />
+
   </ItemGroup>
+
+
+
+
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>

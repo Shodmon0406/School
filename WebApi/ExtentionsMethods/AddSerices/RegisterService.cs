@@ -1,4 +1,10 @@
 ﻿using Infrastructure.Data;
+using Infrastructure.Services.Claas;
+using Infrastructure.Services.ClassroomService;
+using Infrastructure.Services.ClassService;
+using Infrastructure.Services.StudentServices;
+using Infrastructure.Services.SubjectService;
+using Infrastructure.Services.Teacher;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,7 +16,12 @@ public static class RegisterService
     {
         services.AddDbContext<DataContext>(configure =>
             configure.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
-        
+
+        services.AddScoped<IClassService, ClassService>();
+        services.AddScoped<IStudentService, StudentService>();
+        services.AddScoped<ITeacherService, TeacherService>();
+        services.AddScoped<IClassroomService, ClassroomService>();
+        services.AddScoped<ISubjectService, SubjectService>();
 
         services.AddIdentity<IdentityUser, IdentityRole>(config =>
         {
