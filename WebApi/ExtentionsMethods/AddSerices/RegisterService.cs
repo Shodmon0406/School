@@ -1,4 +1,5 @@
 ﻿using Infrastructure.Data;
+using Infrastructure.Services.AccountService;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -10,7 +11,7 @@ public static class RegisterService
     {
         services.AddDbContext<DataContext>(configure =>
             configure.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
-        
+        services.AddScoped<IAccountService, AccountService>();
 
         services.AddIdentity<IdentityUser, IdentityRole>(config =>
         {
