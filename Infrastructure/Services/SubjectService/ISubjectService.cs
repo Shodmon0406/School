@@ -8,7 +8,7 @@ public  interface ISubjectService
 {
     Task<PagedResponse<List<GetSubjectDto>>> GetSubjectAsync(GetSubjectFilter filter);
     Task<Response<GetSubjectDto>> GetSubjectByIdAsync(int id);
-    Task<Response<GetSubjectDto>> CreateSubjectAsync(AddStudentDto addStudent);
-    Task<Response<GetSubjectDto>> UpdateSubjectAsync(AddStudentDto updateStudent);
+    Task<Response<GetSubjectDto>> CreateSubjectAsync(AddSubjectDto addSubject);
+    Task<Response<GetSubjectDto>> UpdateSubjectAsync(AddSubjectDto updateSubject);
     Task<Response<bool>> DeleteSubjectAsync(int id);
 }
