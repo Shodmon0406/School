@@ -1,4 +1,5 @@
 ﻿using Infrastructure.Data;
+using Infrastructure.Services.AccountService;
 using Infrastructure.Services.Claas;
 using Infrastructure.Services.ClassroomService;
 using Infrastructure.Services.ClassService;
@@ -16,6 +17,9 @@ public static class RegisterService
     {
         services.AddDbContext<DataContext>(configure =>
             configure.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
+
+      services.AddScoped<IAccountService, AccountService>();
+
 
         services.AddScoped<IClassService, ClassService>();
         services.AddScoped<IStudentService, StudentService>();
