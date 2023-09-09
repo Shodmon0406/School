@@ -4,7 +4,7 @@ using Infrastructure.Services.ClassroomService;
 using Infrastructure.Services.ClassService;
 using Infrastructure.Services.StudentServices;
 using Infrastructure.Services.SubjectService;
-using Infrastructure.Services.Teacher;
+using Infrastructure.Services.TeacherServices;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

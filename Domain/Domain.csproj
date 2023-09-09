@@ -25,7 +25,6 @@
 
   <ItemGroup>
     <Folder Include="Constant\" />
-    <Folder Include="Filters\TeacherFilter\" />
   </ItemGroup>
 
 </Project>
