@@ -27,21 +27,21 @@ public class ParentController : ControllerBase
         return await _parentService.GetParentById(id);
     }
 
-[HttpPost("AddParent")]
-async public    Task<Response<GetParentDto>> AddParent(AddParentDto parent)
-{
-    return await _parentService.AddParent(parent);
-}
+    [HttpPost("AddParent")]
+    async public Task<Response<GetParentDto>> AddParent([FromQuery]AddParentDto parent)
+    {
+        return await _parentService.AddParent(parent);
+    }
 
-[HttpPut("UpdateParent")]
- async public   Task<Response<GetParentDto>> UpdateParent(AddParentDto parent)
- {
-   return await _parentService.UpdateParent(parent);
- }
+    [HttpPut("UpdateParent")]
+    async public Task<Response<GetParentDto>> UpdateParent(AddParentDto parent)
+    {
+        return await _parentService.UpdateParent(parent);
+    }
 
- [HttpDelete("DeleteParent")]
-   async public Task<Response<bool>> DeleteParent(int id)
-   {
-    return await _parentService.DeleteParent(id);
-   }
+    [HttpDelete("DeleteParent")]
+    async public Task<Response<bool>> DeleteParent(int id)
+    {
+        return await _parentService.DeleteParent(id);
+    }
 }

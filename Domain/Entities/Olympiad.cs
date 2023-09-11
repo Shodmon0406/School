@@ -8,5 +8,6 @@ public class Olympiad
     public string Subject { get; set; }
     public string Award { get; set; }
     public DateTime Year { get; set; }
+    public List<StudentOlympiad> StudentOlympiad { get; set; }
 
 }

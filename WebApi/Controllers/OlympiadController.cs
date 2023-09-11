@@ -34,11 +34,13 @@ public class OlympiadController : ControllerBase
         return await AddOlympiad(olympiad);
     }
 
-    [HttpPut]
+    [HttpPut("UpdateOlimpiad")]
     async public Task<Response<GetOlympiadDto>> UpdateOlympiad(AddOlympiadDto olympiad)
     {
         return await UpdateOlympiad(olympiad);
     }
+
+    [HttpDelete("DeleteOlymiad")]
     async public Task<Response<bool>> DeleteOlympiad(int id)
     {
         return await DeleteOlympiad(id);
