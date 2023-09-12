@@ -16,6 +16,9 @@ namespace Infrastructure.Data
         public DbSet<ClassStudent> ClassStudents { get; set; }
         public DbSet<StudentParrent> StudentParrents { get; set; }
         public DbSet<Parent> Parents { get; set; }
+        public DbSet<Olympiad> Olympiads { get; set; }
         public DbSet<Stipend> Stipends { get; set; }
     }
+
+
 }

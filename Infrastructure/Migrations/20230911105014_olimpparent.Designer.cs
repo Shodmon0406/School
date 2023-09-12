@@ -3,6 +3,7 @@ using System;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230911105014_olimpparent")]
+    partial class olimpparent
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -164,19 +167,12 @@ namespace Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("Gender")
-                        .HasColumnType("integer");
-
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<int>("ParentCode")
+                    b.Property<int>("ParrentCode")
                         .HasColumnType("integer");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("text");
 
                     b.Property<string>("Phone")
                         .IsRequired()
@@ -190,9 +186,7 @@ namespace Infrastructure.Migrations
                     b.ToTable("Parents");
                 });
 
-
-            modelBuilder.Entity("Domain.Entities.Stipend", b =>
-
+            modelBuilder.Entity("Domain.Entities.StudentOlympiad", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -200,31 +194,22 @@ namespace Infrastructure.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int>("StipendType")
+                    b.Property<int>("OlympiadId")
                         .HasColumnType("integer");
 
-                    b.Property<string>("StudenId")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<int>("StudentId")
+                        .HasColumnType("integer");
 
-                    b.Property<string>("StudentId")
+                    b.Property<string>("StudentId1")
                         .HasColumnType("text");
-
-                    b.Property<DateTime>("UpdateAt")
-                        .HasColumnType("timestamp with time zone");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("StudentId");
+                    b.HasIndex("OlympiadId");
 
-                    b.ToTable("Stipends");
+                    b.HasIndex("StudentId1");
+
+                    b.ToTable("StudentOlympiad");
                 });
 
             modelBuilder.Entity("Domain.Entities.StudentParrent", b =>
@@ -259,18 +244,12 @@ namespace Infrastructure.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("SubjectId"));
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<int>("Stage")
                         .HasColumnType("integer");
 
                     b.Property<string>("SubjectName")
                         .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<DateTime>("UpdateAt")
-                        .HasColumnType("timestamp with time zone");
 
                     b.HasKey("SubjectId");
 
@@ -309,10 +288,6 @@ namespace Infrastructure.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -545,10 +520,6 @@ namespace Infrastructure.Migrations
                     b.Property<bool>("Active")
                         .HasColumnType("boolean");
 
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -632,15 +603,32 @@ namespace Infrastructure.Migrations
                     b.Navigation("Student");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Stipend", b =>
+            modelBuilder.Entity("Domain.Entities.Olympiad", b =>
                 {
                     b.HasOne("Domain.Entities.Student", "Student")
-                        .WithMany("Stipends")
+                        .WithMany()
                         .HasForeignKey("StudentId");
 
                     b.Navigation("Student");
                 });
-                
+
+            modelBuilder.Entity("Domain.Entities.StudentOlympiad", b =>
+                {
+                    b.HasOne("Domain.Entities.Olympiad", "Olympiad")
+                        .WithMany("StudentOlympiad")
+                        .HasForeignKey("OlympiadId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.Student", "Student")
+                        .WithMany("StudentOlympiad")
+                        .HasForeignKey("StudentId1");
+
+                    b.Navigation("Olympiad");
+
+                    b.Navigation("Student");
+                });
+
             modelBuilder.Entity("Domain.Entities.StudentParrent", b =>
                 {
                     b.HasOne("Domain.Entities.Parent", "Parent")
@@ -747,7 +735,7 @@ namespace Infrastructure.Migrations
                 {
                     b.Navigation("ClassesStudents");
 
-                    b.Navigation("Stipends");
+                    b.Navigation("StudentOlympiad");
 
                     b.Navigation("StudentParrents");
                 });

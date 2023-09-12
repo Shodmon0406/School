@@ -25,6 +25,9 @@ namespace Domain.Entities
         public DateTime UpdateAt { get; set; }
         public List<ClassStudent> ClassesStudents { get; set; }
         public List<StudentParrent> StudentParrents { get; set; }
+        public List<StudentOlympiad> StudentOlympiad { get; set; }
         public List<Stipend> Stipends { get; set; }
     }
+
+
 }
