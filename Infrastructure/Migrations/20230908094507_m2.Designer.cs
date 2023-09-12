@@ -3,6 +3,7 @@ using System;
 using Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Infrastructure.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230908094507_m2")]
+    partial class m2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -112,39 +115,6 @@ namespace Infrastructure.Migrations
                     b.ToTable("Classrooms");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Olympiad", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Award")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("Discription")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("StudentId")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Subject")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("Year")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("StudentId");
-
-                    b.ToTable("Olympiads");
-                });
-
             modelBuilder.Entity("Domain.Entities.Parent", b =>
                 {
                     b.Property<int>("Id")
@@ -163,9 +133,6 @@ namespace Infrastructure.Migrations
                     b.Property<string>("FirstName")
                         .IsRequired()
                         .HasColumnType("text");
-
-                    b.Property<int>("Gender")
-                        .HasColumnType("integer");
 
                     b.Property<string>("LastName")
                         .IsRequired()
@@ -188,43 +155,6 @@ namespace Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Parents");
-                });
-
-
-            modelBuilder.Entity("Domain.Entities.Stipend", b =>
-
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int>("StipendType")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("StudenId")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("StudentId")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime>("UpdateAt")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("StudentId");
-
-                    b.ToTable("Stipends");
                 });
 
             modelBuilder.Entity("Domain.Entities.StudentParrent", b =>
@@ -545,10 +475,6 @@ namespace Infrastructure.Migrations
                     b.Property<bool>("Active")
                         .HasColumnType("boolean");
 
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
@@ -632,15 +558,6 @@ namespace Infrastructure.Migrations
                     b.Navigation("Student");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Stipend", b =>
-                {
-                    b.HasOne("Domain.Entities.Student", "Student")
-                        .WithMany("Stipends")
-                        .HasForeignKey("StudentId");
-
-                    b.Navigation("Student");
-                });
-                
             modelBuilder.Entity("Domain.Entities.StudentParrent", b =>
                 {
                     b.HasOne("Domain.Entities.Parent", "Parent")
@@ -721,11 +638,6 @@ namespace Infrastructure.Migrations
                     b.Navigation("Classes");
                 });
 
-            modelBuilder.Entity("Domain.Entities.Olympiad", b =>
-                {
-                    b.Navigation("StudentOlympiad");
-                });
-
             modelBuilder.Entity("Domain.Entities.Parent", b =>
                 {
                     b.Navigation("StudentParrents");
@@ -746,8 +658,6 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Domain.Entities.Student", b =>
                 {
                     b.Navigation("ClassesStudents");
-
-                    b.Navigation("Stipends");
 
                     b.Navigation("StudentParrents");
                 });
