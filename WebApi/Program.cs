@@ -1,5 +1,6 @@
 using Infrastructure.AutoMapper;
 using Infrastructure.Data;
+using Infrastructure.Seed;
 using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.EntityFrameworkCore;
 using WebApi.ExtensionMethods.AuthConfiguration;
@@ -31,6 +32,10 @@ try
     var serviceProvider = app.Services.CreateScope().ServiceProvider;
     var dataContext = serviceProvider.GetRequiredService<DataContext>();
     await dataContext.Database.MigrateAsync();
+    
+    var seeder = serviceProvider.GetService<Seeder>();
+    await seeder.SeedRole();
+    await seeder.SeedUser();
 }
 catch (Exception)
 {
