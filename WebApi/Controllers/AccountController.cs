@@ -2,6 +2,10 @@
 using Domain.Responses;
 using Infrastructure.Services.AccountService;
 using Microsoft.AspNetCore.Identity;
+
+using Domain.Dtos.AccountDtos;
+using Domain.Responses;
+using Infrastructure.Services.AccountService;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApi.Controllers;
@@ -16,13 +20,18 @@ public class AccountController : ControllerBase
     }
 
     [HttpPost("Register")]
+
     public async Task<Response<string>> Register(Register model)
     {
         return await _accountService.Register(model);
     }
-
+    
+    public async Task<Response<string>> Register([FromBody]RegisterDto model)
+    {
+        return await _accountService.Register(model);
+    }
     [HttpPost("Login")]
-    public async Task<Response<string>> Login(Login model)
+    public async Task<Response<string>> Login([FromBody]LoginDto model)
     {
         return await _accountService.Login(model);
     }

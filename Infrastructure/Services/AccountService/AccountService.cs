@@ -1,4 +1,5 @@
-﻿using System.IdentityModel.Tokens.Jwt;
+
+using System.IdentityModel.Tokens.Jwt;
 using System.Net;
 using System.Security.Claims;
 using System.Text;
@@ -8,6 +9,15 @@ using Domain.Responses;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.IdentityModel.Tokens.Jwt;
+using System.Net;
+using System.Security.Claims;
+using System.Text;
+using Domain.Dtos.AccountDtos;
+using Domain.Entities;
+using Domain.Responses;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
@@ -16,6 +26,7 @@ namespace Infrastructure.Services.AccountService;
 public class AccountService : IAccountService
 {
     private readonly UserManager<IdentityUser> _userManager;
+
     private readonly DataContext _context;
     private readonly IConfiguration _configuration;
 
@@ -45,8 +56,6 @@ public class AccountService : IAccountService
                 Email = string.Empty,
                 Phone = string.Empty,
                 LastName = string.Empty,
-              
-                
            };
            await _context.Parents.AddAsync(parent);
             await _userManager.CreateAsync(user,model.Password);
@@ -59,13 +68,53 @@ public class AccountService : IAccountService
         }
     }
 
-    public async Task<Response<string>> Login([FromBody]Login model)
+    public Task<Response<string>> Login(Login model)
+    {
+        throw new NotImplementedException();
+    }
+
+    public AccountService(UserManager<IdentityUser> userManager,IConfiguration configuration)
+    {
+        _userManager = userManager;
+        _configuration = configuration;
+    }
+    public async Task<Response<string>> Register(RegisterDto model)
+    {
+        try
+        {
+            var student = await _userManager.Users.FirstOrDefaultAsync(e => e.UserName == model.UserName);
+            if (student == null)
+            {
+                var user = new Student()
+                {
+                    UserName = model.UserName,
+                    Email = model.Email,
+                    PhoneNumber = model.PhoneNumber
+
+                };
+             await _userManager.CreateAsync(user, model.Password);
+             return new Response<string>($"Registered successful {user.Id}");
+            }
+            else
+            {
+                return new Response<string>(HttpStatusCode.BadRequest, "UserName already registered");
+            }
+        }
+        catch (Exception e)
+        {
+            return new Response<string>(HttpStatusCode.InternalServerError, e.Message);
+        }
+    }
+
+    public async Task<Response<string>> Login(LoginDto model)
+
     {
         try
         {
             var user = await _userManager.FindByNameAsync(model.UserName);
             if (user != null)
             {
+
                 var check = await _userManager.CheckPasswordAsync(user,model.Password);
                 if (check)
                 {
@@ -79,10 +128,12 @@ public class AccountService : IAccountService
             else
             {
                 return new Response<string>(HttpStatusCode.BadRequest, "UserName or Password not found");
+            
             }
         }
         catch (Exception e)
         {
+
             return new Response<string>(HttpStatusCode.InternalServerError,e.Message);
         }
     }
@@ -103,3 +154,4 @@ public class AccountService : IAccountService
     }
 }
 
+       
