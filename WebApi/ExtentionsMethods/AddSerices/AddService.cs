@@ -3,6 +3,7 @@ using Infrastructure.Services.AccountService;
 using Infrastructure.Services.Claas;
 using Infrastructure.Services.ClassroomService;
 using Infrastructure.Services.ClassService;
+using Infrastructure.Services.StipendService;
 using Infrastructure.Services.StudentServices;
 using Infrastructure.Services.SubjectService;
 using Infrastructure.Services.TeacherServices;
@@ -24,6 +25,7 @@ public static class RegisterService
         services.AddScoped<ITeacherService, TeacherService>();
         services.AddScoped<IClassroomService, ClassroomService>();
         services.AddScoped<ISubjectService, SubjectService>();
+        services.AddScoped<IStipendService, StipendService>();
 
         services.AddIdentity<IdentityUser, IdentityRole>(config =>
         {
