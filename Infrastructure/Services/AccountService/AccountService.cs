@@ -15,6 +15,7 @@ using System.Security.Claims;
 using System.Text;
 using Domain.Dtos.AccountDtos;
 using Domain.Entities;
+using Domain.Enums;
 using Domain.Responses;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -57,7 +58,24 @@ public class AccountService : IAccountService
                 Phone = string.Empty,
                 LastName = string.Empty,
            };
+           var teacher = new Teacher()
+           {
+           FirstName = string.Empty,
+           CreatedAt = DateTime.UtcNow,
+           Email = string.Empty,
+           LastName = string.Empty,
+           Phone = string.Empty,
+           Password = string.Empty,
+           Gender = Gender.Empty,
+           JoinDate = DateTime.UtcNow,
+           TeacherCode = 0,
+           IsActive = false,
+           UpdateAt = DateTime.UtcNow,
+           DOB = new DateTime(),
+           WorkingDays = 0,
+           };
            await _context.Parents.AddAsync(parent);
+           await _context.Teachers.AddAsync(teacher);
             await _userManager.CreateAsync(user,model.Password);
             await _context.SaveChangesAsync();
             return new Response<string>(HttpStatusCode.OK, $"Register successful {user.Id}");

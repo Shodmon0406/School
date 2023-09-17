@@ -33,7 +33,7 @@ try
     var dataContext = serviceProvider.GetRequiredService<DataContext>();
     await dataContext.Database.MigrateAsync();
     
-    var seeder = serviceProvider.GetService<Seeder>();
+    var seeder = serviceProvider.GetRequiredService<Seeder>();
     await seeder.SeedRole();
     await seeder.SeedUser();
 }

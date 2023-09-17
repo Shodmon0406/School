@@ -1,4 +1,5 @@
 ﻿using Infrastructure.Data;
+using Infrastructure.Seed;
 using Infrastructure.Services.AccountService;
 using Infrastructure.Services.Claas;
 using Infrastructure.Services.ClassroomService;
@@ -19,6 +20,7 @@ public static class RegisterService
             configure.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
 
         services.AddScoped<IAccountService, AccountService>();
+        services.AddScoped<Seeder>();
         services.AddScoped<IClassService, ClassService>();
         services.AddScoped<IStudentService, StudentService>();
         services.AddScoped<ITeacherService, TeacherService>();

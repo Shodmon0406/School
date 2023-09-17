@@ -32,22 +32,31 @@ public class Seeder
             {
                await _roleManager.CreateAsync(r);
             }
+            else
+            {
+                return;
+            }            
         }
     }
 
     public async Task SeedUser()
     {
-        var existing = _userManager.FindByNameAsync(Roles.Admin);
+        var existing = await _userManager.FindByNameAsync(Roles.Admin);
         if (existing == null)
         {
             var admin = new Student()
             {
                 UserName = Roles.Admin,
                 Email = "fayz00998811@gmail.com",
-                PhoneNumber = "+992800151541" 
+                PhoneNumber = "+992800151541" ,
+                
             };
-             await _userManager.CreateAsync(admin);
+             await _userManager.CreateAsync(admin,"admin123");
             await _userManager.AddToRoleAsync(admin,Roles.Admin);
+        }
+        else
+        {
+            return;
         }
         
     }
